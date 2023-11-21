@@ -36,3 +36,6 @@ Una vez que hayas iniciado el servidor web, puedes acceder a la página web. Par
 localhost:80
 Explicación
 
+En el caso de que quieras Entrar a PHPMYADMIN(AUNQUE NO FUNCIONA POR EL MOMENTO DE FORMA CORRECTA)
+
+Es igual que a la hora de acceder con localhost:80 pero con localhost:8000
