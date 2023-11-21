@@ -1,0 +1,44 @@
+version: "3"
+services:
+  web:
+    build:
+      context: ./www
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    container_name: php
+    depends_on:
+      - database
+    volumes:
+      - ./www:/var/www/html/
+    networks:
+      - misridis
+  database:
+    container_name: BASEDATOS
+    image: mysql:8.2
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: alsele
+      MYSQL_USER: fiumba
+      MYSQL_PASSWORD: fiumba
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+    networks:
+      - misridis
+    ports:
+      - 3306:3306
+  adminphp:
+    build:
+      context: ./PHPMYADMIN # Ruta al directorio del Dockerfile de PHPMyAdmin
+      dockerfile: Dockerfile # Nombre del Dockerfile personalizado
+    ports:
+      - 8000:80
+    depends_on:
+      - database
+    networks:
+      - misridis
+networks:
+  misridis:
+    name: RIDIS
